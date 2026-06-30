@@ -1,0 +1,177 @@
+// Neighbrd data model.
+// Invariant: "overdue" is DERIVED (lastCheckInAt + cadenceDays < now), never stored.
+// Invariant: relationshipHealth is 0..100, recomputed from activity recency + cadence.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RelationshipType {
+  FRIEND
+  FAMILY
+  ASSOCIATE
+  COLLEAGUE
+}
+
+enum ActivityType {
+  CALL
+  MESSAGE
+  EVENT
+  MEETING
+  NOTE
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum LoveLanguage {
+  PHYSICAL_TOUCH
+  QUALITY_TIME
+  WORDS_OF_AFFIRMATION
+  GIFTS
+  ACTS_OF_SERVICE
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  passwordHash String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  contacts  Contact[]
+  events    Event[]
+  goals     Goal[]
+  profile   Profile?
+}
+
+model Contact {
+  id               String           @id @default(cuid())
+  userId           String
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  firstName        String
+  lastName         String?
+  relationship     RelationshipType @default(FRIEND)
+
+  jobTitle         String?
+  company          String?
+  email            String?
+  phone            String?
+  birthday         DateTime?
+
+  tags             String[]         @default([])
+  loveLanguage     LoveLanguage?
+  notes            String?
+
+  // Cadence engine fields
+  cadenceDays      Int              @default(30)        // desired days between check-ins
+  lastCheckInAt    DateTime?                            // set when an Activity is logged
+  relationshipHealth Int            @default(50)        // 0..100, recomputed
+
+  socials          Json?            // { linkedin, instagram, x, facebook, snapchat }
+
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  activities       Activity[]
+  events           Event[]          @relation("ContactEvents")
+
+  @@index([userId])
+  @@index([userId, lastCheckInAt])
+}
+
+model Activity {
+  id         String       @id @default(cuid())
+  contactId  String
+  contact    Contact      @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  type       ActivityType
+  title      String?
+  notes      String?
+  occurredAt DateTime     @default(now())
+  createdAt  DateTime     @default(now())
+
+  @@index([contactId, occurredAt])
+}
+
+model Event {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String
+  startsAt    DateTime
+  endsAt      DateTime?
+  location    String?
+  notes       String?
+
+  contactId   String?
+  contact     Contact?  @relation("ContactEvents", fields: [contactId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId, startsAt])
+}
+
+model Goal {
+  id          String     @id @default(cuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String
+  description String?
+  target      Int        @default(1)
+  current     Int        @default(0)
+  tags        String[]   @default([])
+  status      GoalStatus @default(ACTIVE)
+  startsAt    DateTime?
+  endsAt      DateTime?
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([userId, status])
+}
+
+model Profile {
+  id           String        @id @default(cuid())
+  userId       String        @unique
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  fullName     String?
+  bio          String?
+  email        String?
+  phone        String?
+  jobTitle     String?
+  company      String?
+  college      String?
+  organizations String?
+  mailingAddress String?
+
+  linkedin     String?
+  instagram    String?
+  x            String?
+  facebook     String?
+  snapchat     String?
+
+  loveLanguage LoveLanguage?
+
+  // Public share
+  shareSlug    String?       @unique
+  isPublic     Boolean       @default(false)
+  visibility   Json?         // per-field visibility flags for the public card
+
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}

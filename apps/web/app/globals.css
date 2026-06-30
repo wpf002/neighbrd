@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Brand: Texas Porch palette */
+  --navy: #172a3a;
+  --cream: #f7f0e6;
+  --clay: #c7663a;
+  --gold: #f2b84b;
+  --sage: #7d9270;
+  --charcoal: #262626;
+  --limestone: #e8ddc9;
+}
+body { background: var(--cream); color: var(--charcoal); }
+
+/* Relationship-health gradient bar. Encourage, never shame:
+   clay (needs attention) → golden (reach out) → sage (checked in). */
+.health-bar { height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--clay), var(--gold) 50%, var(--sage)); position: relative; overflow: hidden; }
+.health-bar > span { position: absolute; top: 0; right: 0; height: 100%; background: #efe7d7; }
+
+/* Spec/eyebrow label — Spline Mono, uppercase, tracked out. */
+.eyebrow { font-family: var(--font-spline-mono), ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.14em; }

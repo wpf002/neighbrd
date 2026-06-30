@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["exec", "next", "dev", "-p", "3100"],
+      "cwd": "apps/web",
+      "autoPort": false,
+      "port": 3100
+    }
+  ]
+}
