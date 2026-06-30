@@ -113,12 +113,12 @@ export default function CalendarPage() {
           <div className="grid grid-cols-7 gap-2 max-md:gap-1">
             {cells.map((d, i) =>
               d === null ? (
-                <div key={i} className="aspect-[1.9/1] rounded-[11px] bg-[#f4f5f6]" />
+                <div key={i} className="min-h-[88px] rounded-[11px] bg-[#f4f5f6] max-md:min-h-[52px]" />
               ) : (
                 <button
                   key={i}
                   onClick={() => openAdd(d)}
-                  className={`flex aspect-[1.9/1] flex-col gap-1 overflow-hidden rounded-[11px] border p-2.5 text-left text-[16px] font-semibold transition hover:border-rust max-md:p-1.5 max-md:text-[13px] ${
+                  className={`flex min-h-[88px] flex-col gap-1 overflow-hidden rounded-[11px] border p-2.5 text-left text-[16px] font-semibold transition hover:border-rust max-md:min-h-[52px] max-md:p-1.5 max-md:text-[13px] ${
                     isToday(d) ? 'border-ink bg-ink text-white' : 'border-line-cool text-[#2a3440]'
                   }`}
                 >
