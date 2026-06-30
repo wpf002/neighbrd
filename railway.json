@@ -2,11 +2,10 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "pnpm install --frozen-lockfile && pnpm db:generate && pnpm --filter @neighbrd/api build"
+    "buildCommand": "pnpm install --frozen-lockfile && eval \"$RW_BUILD\""
   },
   "deploy": {
-    "preDeployCommand": "pnpm --filter @neighbrd/db migrate:deploy",
-    "startCommand": "pnpm --filter @neighbrd/api start",
+    "startCommand": "eval \"$RW_START\"",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
