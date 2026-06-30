@@ -222,7 +222,7 @@ export default function ProfilePage() {
           )}
         </div>
 
-        <div>
+        <div className="sticky top-[88px] self-start max-lg:static">
           <div className="mb-[18px] flex items-center gap-2.5 text-[17px] text-muted">
             <Eye size={19} /> Live Preview
           </div>

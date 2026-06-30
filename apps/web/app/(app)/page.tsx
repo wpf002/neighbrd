@@ -135,8 +135,7 @@ function Panel({ title, icon, action, children }: { title: string; icon: React.R
         </h3>
         {action && <span className="cursor-pointer text-[15px] font-medium text-muted hover:text-ink">{action}</span>}
       </div>
-      <div className="my-[18px] h-px bg-line" />
-      {children}
+      <div className="mt-[18px] border-t border-line">{children}</div>
     </section>
   );
 }

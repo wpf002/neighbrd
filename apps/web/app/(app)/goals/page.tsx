@@ -113,38 +113,38 @@ function GoalCard({
   const pct = g.target > 0 ? Math.round((g.current / g.target) * 100) : 0;
   const completed = g.status !== 'ACTIVE';
   return (
-    <div className="rounded-card border border-line/70 bg-white p-[26px] shadow-card">
+    <div className="rounded-card border border-line/70 bg-white p-6 shadow-card">
       <div className="flex items-start justify-between">
-        <div className={`grid h-[46px] w-[46px] place-items-center rounded-xl ${completed ? 'bg-sage/20 text-sage' : 'bg-sage/15 text-sage'}`}>
-          {completed ? <Check size={22} /> : <TrendingUp size={22} />}
+        <div className={`grid h-[42px] w-[42px] place-items-center rounded-xl ${completed ? 'bg-sage/20 text-sage' : 'bg-sage/15 text-sage'}`}>
+          {completed ? <Check size={20} /> : <TrendingUp size={20} />}
         </div>
         <div className="flex gap-3.5 text-muted-2">
           <button onClick={onEdit} className="hover:text-ink" title="Edit">
-            <Pencil size={19} />
+            <Pencil size={18} />
           </button>
           <button onClick={onDelete} className="hover:text-[#c2473f]" title="Delete">
-            <Trash2 size={19} />
+            <Trash2 size={18} />
           </button>
         </div>
       </div>
-      <h4 className="mb-1.5 mt-5 font-serif text-[26px] font-semibold">{g.title}</h4>
-      {g.description && <div className="mb-5 text-[16px] text-muted">{g.description}</div>}
+      <h4 className="mb-1 mt-4 font-serif text-[22px] font-semibold">{g.title}</h4>
+      {g.description && <div className="mb-4 text-[15px] text-muted">{g.description}</div>}
 
-      <div className="flex justify-between text-[18px] font-medium text-[#3a4450]">
+      <div className="flex justify-between text-[16px] font-medium text-[#3a4450]">
         <span>Progress</span>
         <span>
           <b className="font-bold text-ink">{g.current}</b> / {g.target}
         </span>
       </div>
-      <div className="my-3 h-[9px] overflow-hidden rounded-full bg-[#e7e1d2]">
+      <div className="my-2.5 h-[9px] overflow-hidden rounded-full bg-[#e7e1d2]">
         <i className="block h-full bg-sage transition-all" style={{ width: `${pct}%` }} />
       </div>
-      <div className="text-[15px] text-muted-2">{pct}% complete</div>
+      <div className="text-[14px] text-muted-2">{pct}% complete</div>
 
       {g.tags.length > 0 && (
-        <div className="my-5 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-2">
           {g.tags.map((t) => (
-            <span key={t} className="rounded-full border border-line px-4 py-1.5 text-[14px] font-semibold text-[#3a4450]">
+            <span key={t} className="rounded-full border border-line px-3 py-1 text-[13px] font-semibold text-[#3a4450]">
               {t}
             </span>
           ))}
@@ -152,7 +152,7 @@ function GoalCard({
       )}
 
       {(g.startsAt || g.endsAt) && (
-        <div className="border-t border-line pt-[18px] text-[15px] leading-7 text-muted">
+        <div className="mt-4 border-t border-line pt-3 text-[14px] leading-6 text-muted">
           {g.startsAt && (
             <>
               Start: {fmtDate(g.startsAt)}
@@ -164,11 +164,11 @@ function GoalCard({
       )}
 
       {!completed && onIncrement && (
-        <div className="mt-5 flex gap-3">
-          <button onClick={onIncrement} disabled={g.current >= g.target} className="flex-1 rounded-xl border border-line bg-[#f4f1ea] py-3.5 text-center font-semibold transition hover:bg-[#ece6da] disabled:opacity-50">
+        <div className="mt-4 flex gap-3">
+          <button onClick={onIncrement} disabled={g.current >= g.target} className="flex-1 rounded-xl border border-line bg-[#f4f1ea] py-3 text-center font-semibold transition hover:bg-[#ece6da] disabled:opacity-50">
             Update Progress
           </button>
-          <button onClick={onComplete} className="grid w-[54px] place-items-center rounded-xl bg-sage text-white transition hover:opacity-90" title="Mark complete">
+          <button onClick={onComplete} className="grid w-[52px] place-items-center rounded-xl bg-sage text-white transition hover:opacity-90" title="Mark complete">
             <Check size={20} />
           </button>
         </div>

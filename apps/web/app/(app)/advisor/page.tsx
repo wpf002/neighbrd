@@ -49,25 +49,25 @@ export default function Advisor() {
 
   return (
     <div>
-      <div className="mb-9 flex items-center gap-[18px]">
-        <div className="grid h-[62px] w-[62px] place-items-center rounded-[15px] bg-gradient-to-br from-[#7c6ad0] to-[#5f4fb0] text-white">
-          <Sparkles size={30} />
+      <div className="mb-6 flex items-center gap-[18px]">
+        <div className="grid h-[56px] w-[56px] place-items-center rounded-[14px] bg-gradient-to-br from-[#7c6ad0] to-[#5f4fb0] text-white">
+          <Sparkles size={28} />
         </div>
         <div>
-          <h1 className="font-serif text-[46px] font-semibold max-md:text-[34px]">AI Relationship Advisor</h1>
-          <p className="mt-1.5 text-[18px] text-muted">Your intelligent assistant for maintaining meaningful connections</p>
+          <h1 className="font-serif text-[40px] font-semibold max-md:text-[32px]">AI Relationship Advisor</h1>
+          <p className="mt-1 text-[17px] text-muted">Your intelligent assistant for maintaining meaningful connections</p>
         </div>
       </div>
 
-      <div className="flex min-h-[560px] flex-col rounded-card border border-line/70 bg-white shadow-card">
-        <div ref={scrollRef} className="flex flex-1 flex-col gap-5 overflow-y-auto px-10 py-8 max-md:px-5" style={{ maxHeight: '60vh' }}>
+      <div className="flex min-h-[440px] flex-col rounded-card border border-line/70 bg-white shadow-card">
+        <div ref={scrollRef} className="flex flex-1 flex-col gap-5 overflow-y-auto px-10 py-7 max-md:px-5" style={{ maxHeight: '58vh' }}>
           {empty ? (
             <div className="flex flex-1 flex-col items-center justify-center text-center">
-              <div className="mb-6 grid h-[88px] w-[88px] place-items-center rounded-full bg-[#ece9f8] text-[#6a5db1]">
-                <Sparkles size={40} />
+              <div className="mb-4 grid h-[72px] w-[72px] place-items-center rounded-full bg-[#ece9f8] text-[#6a5db1]">
+                <Sparkles size={34} />
               </div>
-              <h2 className="mb-3.5 font-serif text-[30px] font-semibold">Start a Conversation</h2>
-              <p className="mb-9 max-w-[460px] text-[18px] text-muted">
+              <h2 className="mb-2.5 font-serif text-[26px] font-semibold">Start a Conversation</h2>
+              <p className="mb-7 max-w-[460px] text-[17px] text-muted">
                 Ask me anything about your contacts, get recommendations, or request summaries
               </p>
               <div className="grid w-full max-w-[880px] grid-cols-2 gap-[18px] max-md:grid-cols-1">

@@ -92,8 +92,8 @@ export default function CalendarPage() {
       {events === null ? (
         <PageLoader />
       ) : (
-        <div className="mt-9 rounded-card border border-line/70 bg-white p-[26px] shadow-card max-md:p-4">
-          <div className="relative flex items-center justify-center gap-[18px] pb-6 pt-1.5">
+        <div className="mt-6 rounded-card border border-line/70 bg-white p-5 shadow-card max-md:p-4">
+          <div className="relative flex items-center justify-center gap-[18px] pb-4 pt-1">
             <button onClick={() => go(-1)} className="absolute left-0 grid h-[46px] w-[46px] place-items-center rounded-[11px] border border-line-cool bg-white text-[#3a4450] hover:bg-[#f4f1ea]">
               <ChevronLeft size={20} />
             </button>
@@ -105,20 +105,20 @@ export default function CalendarPage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-7 gap-3.5 px-1 pb-3 text-[17px] text-muted max-md:gap-1 max-md:text-[13px]">
+          <div className="grid grid-cols-7 gap-2 px-1 pb-2 text-[15px] text-muted max-md:gap-1 max-md:text-[13px]">
             {DOW.map((d) => (
               <span key={d}>{d}</span>
             ))}
           </div>
-          <div className="grid grid-cols-7 gap-3.5 max-md:gap-1">
+          <div className="grid grid-cols-7 gap-2 max-md:gap-1">
             {cells.map((d, i) =>
               d === null ? (
-                <div key={i} className="aspect-[1.35/1] rounded-[13px] bg-[#f4f5f6]" />
+                <div key={i} className="aspect-[1.9/1] rounded-[11px] bg-[#f4f5f6]" />
               ) : (
                 <button
                   key={i}
                   onClick={() => openAdd(d)}
-                  className={`flex aspect-[1.35/1] flex-col gap-1 overflow-hidden rounded-[13px] border p-3.5 text-left text-[19px] font-semibold transition hover:border-rust max-md:p-1.5 max-md:text-[13px] ${
+                  className={`flex aspect-[1.9/1] flex-col gap-1 overflow-hidden rounded-[11px] border p-2.5 text-left text-[16px] font-semibold transition hover:border-rust max-md:p-1.5 max-md:text-[13px] ${
                     isToday(d) ? 'border-ink bg-ink text-white' : 'border-line-cool text-[#2a3440]'
                   }`}
                 >
