@@ -69,9 +69,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@neighbrd/schemas':
-        specifier: workspace:*
-        version: link:../../packages/schemas
       lucide-react:
         specifier: ^0.460.0
         version: 0.460.0(react@19.2.7)

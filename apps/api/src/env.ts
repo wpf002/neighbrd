@@ -6,7 +6,8 @@ import { dirname, resolve } from 'node:path';
 config({ path: resolve(dirname(fileURLToPath(import.meta.url)), '../../../.env') });
 
 export const env = {
-  port: Number(process.env.API_PORT ?? 4000),
+  // Railway (and most PaaS) inject PORT; fall back to API_PORT then 4000 for local dev.
+  port: Number(process.env.PORT ?? process.env.API_PORT ?? 4000),
   host: process.env.API_HOST ?? '0.0.0.0',
   webOrigin: process.env.WEB_ORIGIN ?? 'http://localhost:3000',
   jwtSecret: process.env.JWT_SECRET ?? 'dev-only-insecure-secret',

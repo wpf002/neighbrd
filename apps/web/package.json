@@ -5,12 +5,11 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start -p 3000",
+    "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@neighbrd/schemas": "workspace:*",
     "lucide-react": "^0.460.0",
     "next": "^15.0.3",
     "react": "^19.0.0",
