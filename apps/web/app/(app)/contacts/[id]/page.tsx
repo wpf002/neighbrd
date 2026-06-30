@@ -75,12 +75,12 @@ export default function ContactDetailPage() {
   const role = [contact.jobTitle, contact.company].filter(Boolean).join(' at ');
 
   return (
-    <div className="max-w-[1100px]">
+    <div className="max-w-[1320px]">
       <Link href="/contacts" className="mb-7 inline-flex items-center gap-2 text-[16px] font-medium text-muted hover:text-ink">
-        <ArrowLeft size={18} /> Back to contacts
+        <ArrowLeft size={18} /> Back to Contacts
       </Link>
 
-      <div className="grid grid-cols-[1.4fr_1fr] gap-7 max-lg:grid-cols-1">
+      <div className="grid grid-cols-[1.4fr_1fr] items-stretch gap-7 max-lg:grid-cols-1">
         {/* Left: identity + activity */}
         <div className="space-y-7">
           <section className="rounded-card border border-line/70 bg-white p-8 shadow-card">
@@ -154,19 +154,24 @@ export default function ContactDetailPage() {
           </section>
         </div>
 
-        {/* Right: health + cadence */}
-        <div className="space-y-7">
-          <section className="rounded-card border border-line/70 bg-white p-8 shadow-card">
-            <h3 className="font-serif text-[22px] font-semibold">Relationship Health</h3>
-            <div className="my-4 font-serif text-[46px] font-semibold">{contact.relationshipHealth}<span className="text-[24px] text-muted-2">/100</span></div>
-            <HealthBar value={contact.relationshipHealth} />
-            <dl className="mt-7 space-y-3.5 border-t border-line pt-5 text-[16px]">
-              <Row label="Check-in cadence">Every {contact.cadenceDays} days</Row>
-              <Row label="Last check-in">{contact.lastCheckInAt ? fmtDate(contact.lastCheckInAt) : 'Never'}</Row>
-              <Row label="Status">{dueLabel(contact)}</Row>
-            </dl>
-          </section>
-        </div>
+        {/* Right: health + cadence — stretches to match the left column's height */}
+        <section className="flex flex-col rounded-card border border-line/70 bg-white p-8 shadow-card">
+          <h3 className="font-serif text-[22px] font-semibold">Relationship Health</h3>
+          <div className="my-auto py-6">
+            <div className="font-serif text-[46px] font-semibold">
+              {contact.relationshipHealth}
+              <span className="text-[24px] text-muted-2">/100</span>
+            </div>
+            <div className="mt-4">
+              <HealthBar value={contact.relationshipHealth} />
+            </div>
+          </div>
+          <dl className="space-y-3.5 border-t border-line pt-6 text-[16px]">
+            <Row label="Check-in cadence">Every {contact.cadenceDays} days</Row>
+            <Row label="Last check-in">{contact.lastCheckInAt ? fmtDate(contact.lastCheckInAt) : 'Never'}</Row>
+            <Row label="Status">{dueLabel(contact)}</Row>
+          </dl>
+        </section>
       </div>
 
       <ContactForm
